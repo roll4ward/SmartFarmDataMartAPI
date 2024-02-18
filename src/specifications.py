@@ -1,7 +1,7 @@
 import requests
 
 from src.decorator import print_docstring
-
+from codes.error import ResponseErrorCode
 
 
 class _SmartFarmAPIRequester:
@@ -14,7 +14,19 @@ class _SmartFarmAPIRequester:
         response = requests.get(f'{self._base_url}{endpoint}', params=params)
         
         if response.status_code == 200:
-            return response.json()  # Return JSON content
+            # 공통 responde 메세지 출력
+            
+            result = response.json()
+            statusCode, statusMessage = result[0]["statusCode"], result[0]["statusMessage"]
+            print(
+        f"""
+        * Response *
+            - statusCode    : {statusCode}
+            - statusMessage : {statusMessage}
+            - statusDesc    : {ResponseErrorCode.get_description(statusCode)}
+        """)
+            
+            return result  # Return JSON content
         else:
             response.raise_for_status()  # Raise HTTPError for bad responses
 

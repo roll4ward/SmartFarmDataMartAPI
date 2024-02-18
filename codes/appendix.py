@@ -501,8 +501,8 @@ class FatrCode(SmartFarmCodes):
     }
     
     @staticmethod
-    def sect_of_fatrcode(fatrcode: str) -> str:
-        for k, v in FatrCode.sect_fatrs_dict:
+    def sectcode_of_fatrcode(fatrcode: str) -> str:
+        for k, v in FatrCode.sect_fatrs_dict.items():
             if fatrcode in v:
                 return k
         else:
