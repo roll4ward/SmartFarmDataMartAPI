@@ -1,4 +1,4 @@
-"""별첨. Code class 정의"""
+""" Codes class 정의 """
 
 
 class SmartFarmCodes:

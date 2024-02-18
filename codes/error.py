@@ -1,4 +1,4 @@
-from codes.smartfarm_codes import SmartFarmCodes
+from codes.smartFarmCodes import SmartFarmCodes
 
 
 class ResponseErrorCode(SmartFarmCodes):
