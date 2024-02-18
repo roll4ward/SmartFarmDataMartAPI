@@ -37,3 +37,34 @@ service_key: "9d7b25ec.................."
 ```
 3. 자세한 활용방법은 `usage_code.ipynb` 를 참고하세요. 간단합니다!
 
+### 🖌 사용 가능한 API lists
+- `provide`
+    - `getIdentityDataList`: 아이덴티티 정보
+    - `getCroppingSeasonDataList`: 작기 정보
+    - `getEnvDataList`: 환경 정보
+    - `getStrbCultivateDataList`: 생육 정보(딸기)
+    - `getMumCultivateDataList`: 생육 정보(국화)
+    - `getFruitCultivateDataList`: 생육 정보(참외)
+    - `getCultivateDataList`: 생육 정보(그외)
+
+- `crop_season`
+    - `getCroppingSeasonDataList`: 농가별 작기 정보
+    - `getCroppingSeasonEnvDataList`: 작기별 환경 정보
+    - `getCroppingSeasonManlDataList`: 작기별 제어 정보
+    - `getCultivateDataList`: 작기별 생육 정보
+
+### 별첨 코드
+- 1. __품목코드__ (`ItemCode`)
+    - example usage: `codes.appendix.ItemCode.get_code()`
+- 2. __분야코드__ (`FldCode`)
+    - example usage: `codes.appendix.FldCode.get_code()`
+- 3. __분류코드__ (`SectCode`)
+    - example usage: `codes.appendix.SectCode.get_code()`
+- 4. __항목코드__ (`FatrCode`)
+    - example usage: `codes.appendix.FatrCode.get_code()`
+
+
+
+
+
+
