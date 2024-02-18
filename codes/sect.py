@@ -1,4 +1,4 @@
-"""별첨. 3.3. 분류코드 (sectCode)"""
+"""별첨. 3. 분류코드 (sectCode)"""
 
 from codes.smartfarm_codes import SmartFarmCodes
 

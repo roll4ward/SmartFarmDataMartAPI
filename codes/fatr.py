@@ -1,4 +1,4 @@
-"""별첨. 3.4. 항목코드 (fatrCode)""" 
+"""별첨. 4. 항목코드 (fatrCode)""" 
 
 from codes.smartfarm_codes import SmartFarmCodes
 

@@ -1,4 +1,4 @@
-"""별첨. 3.1. 품목코드 (itemCode)"""
+""" 별첨 1. 품목코드 (itemCode) """
 
 from codes.smartfarm_codes import SmartFarmCodes
 
