@@ -8,9 +8,12 @@ def singleton(cls):
 
 def print_docstring(func):
     """
-    A decorator that prints the docstring of the function it decorates.
+    A decorator that prints the docstring of the function it decorates based on a 'verbose' keyword argument passed at runtime.
     """
     def wrapper(*args, **kwargs):
-        print(func.__doc__)
+        verbose = kwargs.get('verbose', True)
+        if verbose:
+            print(func.__doc__)
         return func(*args, **kwargs)
+    
     return wrapper
