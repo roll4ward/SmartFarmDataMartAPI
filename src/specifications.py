@@ -9,7 +9,7 @@ class _SmartFarmAPIRequester:
         self._secrete_key = secrete_key
         self._base_url = "http://www.smartfarmkorea.net/Agree_WS/webservices"
 
-    def _send_request(self, endpoint, params=None):
+    def _send_request(self, endpoint, params=None, verbose=True):
         """Send an HTTP request to the specified endpoint."""
         response = requests.get(f'{self._base_url}{endpoint}', params=params)
         
@@ -18,13 +18,15 @@ class _SmartFarmAPIRequester:
             
             result = response.json()
             statusCode, statusMessage = result[0]["statusCode"], result[0]["statusMessage"]
-            print(
-        f"""
-        * Response *
-            - statusCode    : {statusCode}
-            - statusMessage : {statusMessage}
-            - statusDesc    : {ResponseErrorCode.get_description(statusCode)}
-        """)
+            
+            if verbose:
+                print(
+            f"""
+            * Response *
+                - statusCode    : {statusCode}
+                - statusMessage : {statusMessage}
+                - statusDesc    : {ResponseErrorCode.get_description(statusCode)}
+            """)
             
             return result  # Return JSON content
         else:
@@ -33,7 +35,7 @@ class _SmartFarmAPIRequester:
 
 class SmartFarmProvideAPI(_SmartFarmAPIRequester):
     @print_docstring
-    def getIdentityDataList(self):
+    def getIdentityDataList(self, verbose=True):
         """
         상세 기능 번호  : 1
         상세 기능 설명  : 스마트팜 보급 농가의 사용자ID, 시설ID, 지역, 품목코드 조회   
@@ -48,10 +50,10 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             - `itemCode`    : 품목코드 (별첨 1. 품목코드 참고: ItemCode.get_code())
         """
         endpoint = f"/ProvideRestService/getIdentityDataList/{self._secrete_key}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
-    def getCroppingSeasonDataList(self, userId):
+    def getCroppingSeasonDataList(self, userId, verbose=True):
         """
         상세 기능 번호  : 2
         상세 기능 설명  : 스마트팜 보급 농가 사용자의 작기 정보 조회 
@@ -83,13 +85,14 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             stndMeta: 기초대사 (작물의 기초대사)
         """
         endpoint = f"/ProvideRestService/getCroppingSeasonDataList/{self._secrete_key}/{userId}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getEnvDataList(
         self,
         facilityId: str, measDate: str, fldCode: str, 
-        sectCode: str, fatrCode: str, itemCode: str
+        sectCode: str, fatrCode: str, itemCode: str,
+        verbose=True
     ):
         """
         상세 기능 번호  : 3
@@ -113,12 +116,13 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             senVal: 측정값 String 
         """
         endpoint = f"/ProvideRestService/getEnvDataList/{self._secrete_key}/{facilityId}/{measDate}/{fldCode}/{sectCode}/{fatrCode}/{itemCode}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getStrbCultivateDataList(
         self,
-        userId: str, croppingSerlNo: int, startDate: str, endDate: str
+        userId: str, croppingSerlNo: int, startDate: str, endDate: str,
+        verbose=True
     ):
         """
         상세 기능 번호  : 4
@@ -152,12 +156,12 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             
         """
         endpoint = f"/ProvideRestService/getStrbCultivateDataList/{self._secrete_key}/{userId}/{croppingSerlNo}/{startDate}/{endDate}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getMumCultivateDataList(
         self,
-        userId: str, croppingSerlNo: int, startDate: str, endDate: str
+        userId: str, croppingSerlNo: int, startDate: str, endDate: str, verbose=True
     ):
         """
         상세 기능 번호  : 5
@@ -179,12 +183,12 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             leavesNum: 엽수 Double (잎의 수) (단위 : 개)
         """
         endpoint = f"/ProvideRestService/MumCultivateDataList/{self._secrete_key}/{userId}/{croppingSerlNo}/{startDate}/{endDate}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getFruitCultivateDataList(
         self,
-        userId: str, croppingSerlNo: int, startDate: str, endDate: str
+        userId: str, croppingSerlNo: int, startDate: str, endDate: str, verbose=True
     ):
         """
         상세 기능 번호  : 6
@@ -206,12 +210,12 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             thecaDiameter: 관부 직경 Double (단위 : mm)
         """
         endpoint = f"/ProvideRestService/getFruitCultivateDataList/{self._secrete_key}/{userId}/{croppingSerlNo}/{startDate}/{endDate}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getCultivateDataList(
         self,
-        userId: str, croppingSerlNo: int, startDate: str, endDate: str
+        userId: str, croppingSerlNo: int, startDate: str, endDate: str, verbose=True
     ):
         """
         상세 기능 번호  : 7
@@ -243,12 +247,12 @@ class SmartFarmProvideAPI(_SmartFarmAPIRequester):
             fruitsWeight: 평균과중 Double (평균 열매의 무게) (단위 : g)
         """
         endpoint = f"/ProvideRestService/getCultivateDataList/{self._secrete_key}/{userId}/{croppingSerlNo}/{startDate}/{endDate}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
 
 
 class SmartFarmCropSeasonAPI(_SmartFarmAPIRequester):
     @print_docstring
-    def getCroppingSeasonDataList(self, year: str):
+    def getCroppingSeasonDataList(self, year: str, verbose=True):
         """
         상세 기능 번호  : 1
         상세 기능 설명  : 스마트팜 보급 농가 사용자의 작기 정보 조회 
@@ -270,13 +274,14 @@ class SmartFarmCropSeasonAPI(_SmartFarmAPIRequester):
             acqMgmtYn : 경영정보 등록 유무 String (Y : 등록, N : 미등록)
         """
         endpoint = f"/CropseasonRestService/getCroppingSeasonDataList/{self._secrete_key}/{year}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getCroppingSeasonEnvDataList(
         self, 
         croppingSerlNo: int,
-        pageNum: int
+        pageNum: int,
+        verbose=True,
     ):
         """
         상세 기능 번호  : 2
@@ -302,13 +307,14 @@ class SmartFarmCropSeasonAPI(_SmartFarmAPIRequester):
             totalPage: 전체 페이지 String 
         """
         endpoint = f"/CropseasonRestService/getCroppingSeasonEnvDataList/{self._secrete_key}/{croppingSerlNo}/{pageNum}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getCroppingSeasonManlDataList(
         self, 
         croppingSerlNo: int,
-        pageNum: int
+        pageNum: int, 
+        verbose=True,
     ):
         """
         상세 기능 번호  : 3
@@ -334,12 +340,12 @@ class SmartFarmCropSeasonAPI(_SmartFarmAPIRequester):
             totalPage: 전체 페이지 String 
         """
         endpoint = f"/CropseasonRestService/getCroppingSeasonManlDataList/{self._secrete_key}/{croppingSerlNo}/{pageNum}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
     
     @print_docstring
     def getCultivateDataList(
         self, 
-        croppingSerlNo: int,
+        croppingSerlNo: int, verbose=True,
     ):
         """
         상세 기능 번호  : 4
@@ -362,4 +368,4 @@ class SmartFarmCropSeasonAPI(_SmartFarmAPIRequester):
             examinIemUnit: 조사 항목 단위 String 
         """
         endpoint = f"/CropseasonRestService/getCultivateDataList/{self._secrete_key}/{croppingSerlNo}"
-        return self._send_request(endpoint)
+        return self._send_request(endpoint, verbose=verbose)
