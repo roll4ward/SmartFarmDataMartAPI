@@ -36,6 +36,10 @@ pip install pyyaml
 service_key: "9d7b25ec.................."
 ```
 3. 자세한 활용방법은 `usage_code.ipynb` 를 참고하세요. 간단합니다!
+4. package로 사용하기 위해서는 setup.py 파일을 활용하여 package로 사용합니다.
+```shell
+python -m pip install -e .
+```
 
 ### 🖌 사용 가능한 API lists
 - `provide`
