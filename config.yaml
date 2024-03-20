@@ -1,1 +1,2 @@
 service_key: "<발급받은 service key>"
+data_caching_root: ".cache_api"
