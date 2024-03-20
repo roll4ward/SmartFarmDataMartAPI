@@ -1,6 +1,6 @@
 import yaml
 
-from src.decorator import singleton
+from src.utils import singleton
 from src.specifications import SmartFarmProvideAPI
 from src.specifications import SmartFarmCropSeasonAPI
 

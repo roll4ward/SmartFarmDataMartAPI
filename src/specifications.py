@@ -1,6 +1,7 @@
 import requests
+import functools
 
-from src.decorator import print_docstring
+from src.utils import print_docstring, cache_api_response
 from codes.error import ResponseErrorCode
 
 
@@ -9,6 +10,7 @@ class _SmartFarmAPIRequester:
         self._secrete_key = secrete_key
         self._base_url = "http://www.smartfarmkorea.net/Agree_WS/webservices"
 
+    @cache_api_response
     def _send_request(self, endpoint, params=None, verbose=True):
         """Send an HTTP request to the specified endpoint."""
         response = requests.get(f'{self._base_url}{endpoint}', params=params)
